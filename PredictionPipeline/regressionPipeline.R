@@ -3,28 +3,28 @@
   base_path = dirname(path)
 
 
-  # args = commandArgs(trailingOnly=TRUE)
+  args = commandArgs(trailingOnly=TRUE)
 
-  # if (length(args) < 4){
-  #   print("Please mention which prediction you want to make?")
-  #   print("Choices: real, imaginary")
-  #   stop(exiting)
-  # }
+  if (length(args) < 4){
+    print("Please mention which prediction you want to make?")
+    print("Choices: real, imaginary")
+    stop(exiting)
+  }
 
-  # already_running = args[1]
-  # result_dir_name = args[2]
-  # input_file_name = args[3]
-  # model_time_file_name = args[4]
+  already_running = args[1]
+  result_dir_name = args[2]
+  input_file_name = args[3]
+  model_time_file_name = args[4]
   
   
-  already_running = "no"
-  result_dir_name = "test_results_123"
-  input_file_name = "dos_total_pure_R8.csv"
-  model_time_file_name = "model.csv"
+  # already_running = "no"
+  # result_dir_name = "test_results_123"
+  # input_file_name = "dos_total_pure_R8.csv"
+  # model_time_file_name = "model.csv"
   
+
   out_dir = file.path(path, result_dir_name)
   
-
   if ( (dir.exists(out_dir)) && (already_running == "no") ){
     time_stamp = format(Sys.time(), "%m_%d_%H-%m-%S")
     new_name = paste(out_dir, "_old_", time_stamp, sep="")
@@ -57,7 +57,7 @@
 
   source("DataIO.R")
   
-  out <- load_data(file.path(path, "data", input_file_name))
+  out <- load_data(file.path(base_path, "data", input_file_name))
   train_data <- out[[1]]
   test_data <- out[[2]]
 
@@ -67,8 +67,8 @@
   # Set parameters
   time_limit = 1000
   number <- 5
-  repeats <- 3
-  num_top_models = 3
+  repeats <- 5
+  num_top_models = 0
 
   
   print("###################################")
