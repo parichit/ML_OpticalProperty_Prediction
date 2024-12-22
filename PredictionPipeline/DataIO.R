@@ -12,15 +12,22 @@ read_data <- function(base_data_path){
   Inputdata <- apply(Inputdata, 2, as.numeric)
   Inputdata <- as.data.frame(Inputdata)
 
-  target = Inputdata[, 2]
-  Inputdata <- Inputdata[, -ncol(Inputdata)]
+  # target = Inputdata[, 2]
+  # Inputdata <- Inputdata[, -ncol(Inputdata)]
+  # Inputdata <- cbind(Inputdata, target=target)
+
+  target = Inputdata[, 1]
+  Inputdata <- Inputdata[, -1]
   Inputdata <- cbind(Inputdata, target=target)
   
   # Select the valid range of eV and corresponding dos
-  Inputdata <- Inputdata[Inputdata[, 1] <= 2, ]
-  Inputdata <- Inputdata[Inputdata[, 1] >= -10, ]
+  # Inputdata <- Inputdata[Inputdata[, 1] <= 2, ]
+  # Inputdata <- Inputdata[Inputdata[, 1] >= -10, ]
+
+   Inputdata <- Inputdata[Inputdata[, 2] <= 2, ]
+  Inputdata <- Inputdata[Inputdata[, 2] >= -10, ]
   
-  colnames(Inputdata) <- c("ev", "target")
+  colnames(Inputdata) <- c("DOS", "target")
   Inputdata <- as.data.frame(Inputdata)
 
   return(Inputdata)
